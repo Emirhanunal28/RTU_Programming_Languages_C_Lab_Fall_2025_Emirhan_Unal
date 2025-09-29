@@ -45,6 +45,13 @@ $(BUILD_DIR)/lab2_3: $(SRC_DIR)/lab2_3.c
 	@mkdir -p $(BUILD_DIR)
 	$(CC) $(CFLAGS) $< -o $@ $(LDFLAGS)
 
+	# Short aliases so "make lab2_1" works (as the instructor wants)
+.PHONY: lab2_1 lab2_2 lab2_3
+lab2_1: $(BUILD_DIR)/lab2_1
+lab2_2: $(BUILD_DIR)/lab2_2
+lab2_3: $(BUILD_DIR)/lab2_3
+
+
 # -----------------------
 # Lab 3
 # -----------------------
