@@ -26,25 +26,33 @@ int my_strlen(const char *str);
 void my_strcpy(char *dest, const char *src);
 
 int main(void) {
-    // TODO: Test your functions here
-    char test[] = "Programming in C";
-    char copy[100];
+  char test[] = "Programming in C";
+  char copy[100];
 
-    int len = my_strlen(test);
-    printf("Length: %d\n", len);
+  int len = my_strlen(test);
+  printf("Length: %d\n", len);  // Expected: 17
 
-    my_strcpy(copy, test);
-    printf("Copy: %s\n", copy);
+  my_strcpy(copy, test);
+  printf("Copy: %s\n", copy);  // Expected: Programming in C
 
-    return 0;
+  return 0;
 }
 
-// Implement functions below
+// count number of characters until the null terminator
 int my_strlen(const char *str) {
-    // TODO: count characters until '\0'
-    return 0; // placeholder
+  int count = 0;
+  while (str[count] != '\0') {  // loop until end of string
+    count++;
+  }
+  return count;
 }
 
+// copy characters from src to dest, including the null terminator
 void my_strcpy(char *dest, const char *src) {
-    // TODO: copy characters until '\0'
+  int i = 0;
+  while (src[i] != '\0') {  // copy each character
+    dest[i] = src[i];
+    i++;
+  }
+  dest[i] = '\0';  // add null terminator at the end
 }
