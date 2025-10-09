@@ -1,7 +1,7 @@
 /*
  * week4_3_struct_database.c
- * Author: [Your Name]
- * Student ID: [Your ID]
+ * Author: [Emirhan Unal]
+ * Student ID: [231ADB093]
  * Description:
  *   Simple in-memory "database" using an array of structs.
  *   Students will use malloc to allocate space for multiple Student records,
@@ -10,29 +10,66 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
-// TODO: Define struct Student with fields name, id, grade
+struct Student {
+  char name[50];
+  int id;
+  float grade;
+};
 
 int main(void) {
-    int n;
-    struct Student *students = NULL;
+  int n;
 
-    printf("Enter number of students: ");
-    if (scanf("%d", &n) != 1 || n <= 0) {
-        printf("Invalid number.\n");
-        return 1;
+  printf("Enter number of students: ");
+  if (scanf("%d", &n) != 1 || n <= 0) {
+    printf("Invalid number.\n");
+    return 1;
+  }
+
+  struct Student *students =
+      (struct Student *)malloc((size_t)n * sizeof(struct Student));
+  if (students == NULL) {
+    printf("Memory allocation failed!\n");
+    return 1;
+  }
+
+  printf("Enter data for each student as: <name> <id> <grade>\n");
+  printf("(Use names without spaces, e.g., Alice)\n");
+
+  for (int i = 0; i < n; i++) {
+    printf("Enter data for student %d: ", i + 1);
+    if (scanf("%49s %d %f", students[i].name, &students[i].id,
+              &students[i].grade) != 3) {
+      printf("Invalid input.\n");
+      free(students);
+      return 1;
     }
+  }
 
-    // TODO: Allocate memory for n Student structs using malloc
+  printf("\n%-6s %-12s %-6s\n", "ID", "Name", "Grade");
+  printf("-------------------------------\n");
 
-    // TODO: Read student data in a loop
+  float sum = 0.0f;
+  for (int i = 0; i < n; i++) {
+    printf("%-6d %-12s %-6.1f\n", students[i].id, students[i].name,
+           students[i].grade);
+    sum += students[i].grade;
+  }
 
-    // TODO: Display all student records in formatted output
+  printf("-------------------------------\n");
+  printf("Average grade: %.2f\n", sum / n);
 
-    // Optional: Compute average grade or find top student
+  free(students);
 
-    // TODO: Free allocated memory
+  // TODO: Allocate memory for n Student structs using malloc
 
-    return 0;
+  // TODO: Read student data in a loop
+
+  // TODO: Display all student records in formatted output
+
+  // Optional: Compute average grade or find top student
+
+  // TODO: Free allocated memory
+
+  return 0;
 }
